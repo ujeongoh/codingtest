@@ -7,9 +7,7 @@ answer = 0
 left, right = 1, max(lines)
 
 while left <= right:
-    mid = (left + right) // 2
-    if mid == 0: break
-        
+    mid = (left + right) // 2    
     lan_cnt = 0
     for line in lines:
         lan_cnt += line // mid
