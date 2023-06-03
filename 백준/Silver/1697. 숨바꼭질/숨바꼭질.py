@@ -19,4 +19,7 @@ if __name__ == '__main__':
                     visited[i] = visited[loc] + 1
                     q.append(i)
         return
-    bfs()
+    if n == k:
+        print(0)
+    else:
+        bfs()
