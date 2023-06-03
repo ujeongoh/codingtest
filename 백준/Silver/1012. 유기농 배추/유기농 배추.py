@@ -1,22 +1,22 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 
 
 if __name__ == '__main__':
     T = int(input())
-    D = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    dx = [1,0,-1,0]
+    dy = [0,-1,0,1]
 
-    def bfs(coord):
-        q = deque([coord])
+    def bfs(a, b):
+        q = [(a, b)]
         while q:
-            c = q.popleft()
-            land[c[0]][c[1]] = 0
-            for x, y in D:
-                dx, dy = c[0]+x, c[1]+y
-                if dx >= 0 and dy >= 0 and dx < M and dy < N and land[dx][dy] == 1:
-                    q.append([dx, dy])
-                    land[dx][dy] = 0 
+            x, y = q.pop()
+            land[x][y] = 0
+            for i in range(4):
+                nx, ny = x + dx[i], y + dy[i]
+                if nx >= 0 and ny >= 0 and nx < M and ny < N and land[nx][ny] == 1:
+                    q.append([nx, ny])
+                    land[nx][ny] = 0 
 
     for _ in range(T):
         M, N, K = map(int, input().split())
@@ -29,7 +29,7 @@ if __name__ == '__main__':
         for i in range(M):
             for j in range(N):
                 if land[i][j] == 1:
-                    bfs([i, j])
+                    bfs(i, j)
                     count += 1
 
         print(count)
