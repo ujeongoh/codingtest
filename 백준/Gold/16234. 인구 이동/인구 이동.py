@@ -43,12 +43,12 @@ if __name__ == '__main__':
 
     while True:
         visited = [[0] * N for _ in range(N)]
-        count = 0
-        for i, row in enumerate(countries):
-            for j, _ in enumerate(row): 
+        move_count = 0
+        for i in range(N):
+            for j in range(N): 
                 if not visited[i][j]:
-                    count += bfs((i, j))
-        if count == 0:
+                    move_count += bfs((i, j))
+        if move_count == 0:
             break
         else:
             answer += 1
