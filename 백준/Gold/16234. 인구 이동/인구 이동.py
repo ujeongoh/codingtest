@@ -24,13 +24,13 @@ if __name__ == '__main__':
         q = deque([coord])
         while q:
             x, y = q.popleft()
-            visited[(x, y)] = True
+            visited[x][y] = True
             adj.append((x, y))
             sum += countries[x][y]
                 
             for c in get_adj_coords(x, y):
-                if L <= abs(countries[x][y] - countries[c[0]][c[1]]) <= R and c not in visited:
-                    visited[c] = True
+                if L <= abs(countries[x][y] - countries[c[0]][c[1]]) <= R and not visited[c[0]][c[1]]:
+                    visited[c[0]][c[1]] = True
                     q.append(c)
                     
         if len(adj) > 1:    
@@ -42,11 +42,11 @@ if __name__ == '__main__':
             return 0 
 
     while True:
-        visited = {}
+        visited = [[0] * N for _ in range(N)]
         count = 0
         for i, row in enumerate(countries):
             for j, _ in enumerate(row): 
-                if (i, j) not in visited:
+                if not visited[i][j]:
                     count += bfs((i, j))
         if count == 0:
             break
