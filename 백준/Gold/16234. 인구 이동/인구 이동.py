@@ -9,15 +9,6 @@ if __name__ == '__main__':
     dx = [-1, 1, 0, 0]
     dy = [0, 0, -1, 1]
     
-    def get_adj_coords(x, y):
-        coords = []
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if 0 <= nx < N and 0 <= ny < N:
-                coords.append((nx, ny))
-        return coords 
-    
     def bfs(coord):
         adj = []
         sum = 0
@@ -28,10 +19,13 @@ if __name__ == '__main__':
             adj.append((x, y))
             sum += countries[x][y]
                 
-            for c in get_adj_coords(x, y):
-                if L <= abs(countries[x][y] - countries[c[0]][c[1]]) <= R and not visited[c[0]][c[1]]:
-                    visited[c[0]][c[1]] = True
-                    q.append(c)
+            for i in range(4):
+                nx = x + dx[i]
+                ny = y + dy[i]
+                if 0 <= nx < N and 0 <= ny < N:
+                    if L <= abs(countries[x][y] - countries[nx][ny]) <= R and not visited[nx][ny]:
+                        visited[nx][ny] = True
+                        q.append((nx, ny))
                     
         if len(adj) > 1:    
             avg = int(sum / len(adj))        
