@@ -1,18 +1,19 @@
 import sys
-
+from collections import defaultdict
 input = sys.stdin.readline
 
-_dict = dict()
-
-cnt = 0
+trees = defaultdict(int) # 기본 값이 0인 딕셔너리
+tree_num = 0 # 나무의 총 개수
 
 while True:
-    s = input().rstrip()
-    if not s:
+    tree = input().rstrip()
+    if tree == '':
         break
-    _dict[s] = _dict.get(s,0) +1
-    cnt+=1
 
-for k,v in sorted(_dict.items()):
-    ratio = round(v/cnt*100,4)
-    print('%s %.4f' % (k,ratio))
+    tree_num += 1
+    trees[tree] += 1
+
+trees_list = sorted(trees.keys())
+
+for tree in trees_list:
+    print('%s %.4f' %(tree, (trees[tree]/tree_num)*100))
