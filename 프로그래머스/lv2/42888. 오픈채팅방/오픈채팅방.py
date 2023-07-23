@@ -22,7 +22,8 @@ def solution(record):
         elif act == 'Change':
             ids[uid] = nick
 
-    for i, msg in enumerate(msgs):
+    for msg in msgs:
         uid, msg_format = msg
         answer.append(msg_format.format(ids[uid]))
+        
     return answer
